@@ -1,0 +1,60 @@
+@startuml
+
+interface CarBuilder {
+    +setBrand(brand: String): CarBuilder
+    +setModel(model: String): CarBuilder
+    +setColor(color: String): CarBuilder
+    +setEngine(engine: String): CarBuilder
+    +setTransmission(transmission: String): CarBuilder
+    +setSunroof(sunroof: boolean): CarBuilder
+    +build(): Car
+}
+
+abstract class AbstractCarBuilder {
+    #brand: String
+    #model: String
+    #color: String
+    #engine: String
+    #transmission: String
+    #sunroof: boolean
+
+    +setBrand(brand: String): CarBuilder
+    +setModel(model: String): CarBuilder
+    +setColor(color: String): CarBuilder
+    +setEngine(engine: String): CarBuilder
+    +setTransmission(transmission: String): CarBuilder
+    +setSunroof(sunroof: boolean): CarBuilder
+    +build(): Car
+    -validate(): void
+}
+
+class LuxuryCarBuilder
+class EconomyCarBuilder
+
+class Car {
+    -brand: String
+    -model: String
+    -color: String
+    -engine: String
+    -transmission: String
+    -sunroof: boolean
+}
+
+class CarDirector {
+    +buildLuxuryCar(): Car
+    +buildEconomyCar(): Car
+}
+
+class Main
+
+CarBuilder <|.. AbstractCarBuilder
+AbstractCarBuilder <|-- LuxuryCarBuilder
+AbstractCarBuilder <|-- EconomyCarBuilder
+
+AbstractCarBuilder --> Car
+CarDirector --> LuxuryCarBuilder
+CarDirector --> EconomyCarBuilder
+CarDirector --> Car
+Main --> CarDirector
+
+@enduml
